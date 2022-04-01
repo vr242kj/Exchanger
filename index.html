@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS React</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.css">
+</head>
+<body class="bg-dark">
+    <div class="container bg-light p-3">
+        <form>
+            <label for="dateInput">Select date:
+                <input type="date" id="dateInput" name="trip-start">
+            </label>
+        </form>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th><b>r030</b></th>
+                <th>txt</th>
+                <th>rate</th>
+                <th>cc</th>
+                <th>exchange date</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <label for="UAHInput">UAH:
+            <input type="number" id="UAHInput" name="UAHInput" value="0" style="width: 7em">
+        </label>
+        <div>
+            <label for="currencyInput">Select currency:
+                <select class="form-control" id="currencyInput"></select>
+            </label>
+        </div>
+        <form id="form">
+            <button type="submit">Convert</button>
+        </form>
+        <label for="output">
+        <input type="text" id="output" style="width: 7em"/>
+        </label>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
