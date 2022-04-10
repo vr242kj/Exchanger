@@ -6,7 +6,7 @@ const store = function() {
     }
 }();
 
-function renderCountries() {
+function renderCurrencies() {
     let htmlStr = store.getData().reduce((htmlStr, ex) => htmlStr + `<tr>
                                                   <td>${ex.r030}</td>
                                                   <td>${ex.txt }</td>
@@ -19,12 +19,12 @@ function renderCountries() {
     document.querySelector('.table tbody').innerHTML = htmlStr;
 }
 
-function renderSelectCurrency(textedCurrency) {
+function currencySelectionRender(textedCurrency) {
     let currencyHtml = textedCurrency.map(txt => `<option>${txt}</option>`);
     document.getElementById('currencyInput').innerHTML = currencyHtml.join('');
 }
 
-function localOrNewDate () {
+function useLocalOrNewDate () {
     if (localStorage.getItem('Date') !== null) {
         return localStorage.getItem('Date').split('-').join('');
     }
@@ -74,16 +74,11 @@ const fetchPlus = (url) =>
         .then(res => res.json())
         .then(data => {
             store.setData(data);
-            renderCountries();
+            renderCurrencies();
+            let textedCurrency = data.map(currency => currency.txt);
+            textedCurrency.unshift('');
+            currencySelectionRender(textedCurrency);
         });
 
-fetchPlus(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=${localOrNewDate()}&json`)
+fetchPlus(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=${useLocalOrNewDate()}&json`)
     .then(_res => {});
-
-fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=20220323&json')
-    .then(res => res.json())
-    .then(data => {
-        let textedCurrency = data.map(currency => currency.txt);
-        textedCurrency.unshift('')
-        renderSelectCurrency(textedCurrency);
-    });
